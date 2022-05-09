@@ -1,1 +1,40 @@
-Hello World
+<!DOCTYPE html>
+<html lang="ptBR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>João Gustavo Repo</title>
+    <link rel="stylesheet" href="./src/css/index.css">
+    <script src="./src/js/index.js"></script>
+</head>
+
+<body onload="fillTable()">
+    <div class="grid-container">
+        <div class="title">
+            <h1>João Gustavo</h1>
+            <h1 id="subtitle">Repo's</h1>
+        </div>
+        <div class="filter">
+            <h2>Filtros</h2>
+        </div>
+        <div class="main">
+            <div>
+                <input type="text" id="search-input" onkeyup="search()" placeholder="Pesquise por nomes...">
+            </div>
+            <div>
+                <table id="table">
+                    <thead id="cab">
+                        <tr>
+                            <th onclick="sortTable(0)">Nome</th>
+                            <th onclick="sortTable(1)">Último Commit</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
