@@ -19,7 +19,6 @@ body {
     ;
     gap: 10px;
     padding: 10px;
-
 }
 
 .title {
@@ -80,6 +79,7 @@ table tr td {
     border-right: 1px solid #bbb;
     border-bottom: 1px solid #bbb;
     padding: 5px;
+    text-align: center;
 }
 
 table tr:hover {

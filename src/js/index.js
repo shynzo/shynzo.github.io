@@ -2,46 +2,46 @@ var table = {};
 function fillAllTable(n) {
   const cab = document.getElementById("cab");
   $("#table tbody").remove();
-  if (jQuery.isEmptyObject(table)){
+  if (jQuery.isEmptyObject(table)) {
     fetch("https://git-repo-api.shynz0.repl.co")
-    .then((resp) => resp.json())
-    .then(function (data) {
-      table = data;
-      for (const item in data) {
-        let value = data[item];
-        cab.insertAdjacentHTML('beforebegin', 
-        `<tr><td><a href="${value.url}" target="_blank">${item}</a></td><td style="text-align: right">${value.date}</td></tr>`)
-      }
-    });
+      .then((resp) => resp.json())
+      .then(function (data) {
+        table = data;
+        for (const item in data) {
+          let value = data[item];
+          cab.insertAdjacentHTML('beforebegin',
+            `<tr><td><a href="${value.url}" target="_blank">${item}</a></td><td style="text-align: center">${value.date}</td></tr>`)
+        }
+      });
   } else {
-    if (n == 0){
+    if (n == 0) {
       for (const item in table) {
         let value = table[item];
-        cab.insertAdjacentHTML('beforebegin', 
-        `<tr><td><a href="${value.url}" target="_blank">${item}</a></td><td style="text-align: right">${value.date}</td></tr>`);
+        cab.insertAdjacentHTML('beforebegin',
+          `<tr><td><a href="${value.url}" target="_blank">${item}</a></td><td style="text-align: center">${value.date}</td></tr>`);
       }
-    } else if (n == 1){
+    } else if (n == 1) {
       for (const item in table) {
         let value = table[item];
         if (value.archived == true) {
-          cab.insertAdjacentHTML('beforebegin', 
-          `<tr><td><a href="${value.url}" target="_blank">${item}</a></td><td style="text-align: right">${value.date}</td></tr>`);
+          cab.insertAdjacentHTML('beforebegin',
+            `<tr><td><a href="${value.url}" target="_blank">${item}</a></td><td style="text-align: center">${value.date}</td></tr>`);
         }
       }
-    } else if (n == 2){
+    } else if (n == 2) {
       for (const item in table) {
         let value = table[item];
         if (value.license == true) {
-          cab.insertAdjacentHTML('beforebegin', 
-          `<tr><td><a href="${value.url}" target="_blank">${item}</a></td><td style="text-align: right">${value.date}</td></tr>`);
+          cab.insertAdjacentHTML('beforebegin',
+            `<tr><td><a href="${value.url}" target="_blank">${item}</a></td><td style="text-align: center">${value.date}</td></tr>`);
         }
       }
-    } else if (n == 3){
+    } else if (n == 3) {
       for (const item in table) {
         let value = table[item];
         if (value.language == 'Python') {
-          cab.insertAdjacentHTML('beforebegin', 
-          `<tr><td><a href="${value.url}" target="_blank">${item}</a></td><td style="text-align: right">${value.date}</td></tr>`);
+          cab.insertAdjacentHTML('beforebegin',
+            `<tr><td><a href="${value.url}" target="_blank">${item}</a></td><td style="text-align: center">${value.date}</td></tr>`);
         }
       }
     }
@@ -79,15 +79,31 @@ function sortTable(n) {
       shouldSwitch = false;
       x = rows[i].getElementsByTagName("TD")[n];
       y = rows[i + 1].getElementsByTagName("TD")[n];
-      if (dir == "asc") {
-        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-          shouldSwitch = true;
-          break;
+      if (n == 1) {
+        datex = convertDate(x.innerHTML);
+        datey = convertDate(y.innerHTML);
+        if (dir == "asc") {
+          if (datex > datey) {
+            shouldSwitch = true;
+            break;
+          }
+        } else if (dir == "desc") {
+          if (datex < datey) {
+            shouldSwitch = true;
+            break;
+          }
         }
-      } else if (dir == "desc") {
-        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-          shouldSwitch = true;
-          break;
+      } else {
+        if (dir == "asc") {
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            break;
+          }
+        } else if (dir == "desc") {
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            break;
+          }
         }
       }
     }
@@ -102,4 +118,9 @@ function sortTable(n) {
       }
     }
   }
+}
+
+function convertDate(d) {
+  var p = d.split("/");
+  return +(p[2] + p[1] + p[0]);
 }
