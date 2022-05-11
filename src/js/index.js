@@ -1,12 +1,51 @@
-function fillTable() {
+var table = {};
+function fillAllTable(n) {
   const cab = document.getElementById("cab");
-  fetch("https://GithubRepoAPI.shynz0.repl.co/", { method: 'get', mode: 'no-cors' })
+  $("#table tbody").remove();
+  if (jQuery.isEmptyObject(table)){
+    fetch("https://git-repo-api.shynz0.repl.co")
     .then((resp) => resp.json())
     .then(function (data) {
-      for (const [key, value] of Object.entries(data)) {
-        cab.insertAdjacentHTML('beforebegin', `<tr><td>${key}</td><td>${value}</td></tr>`)
+      table = data;
+      for (const item in data) {
+        let value = data[item];
+        cab.insertAdjacentHTML('beforebegin', 
+        `<tr><td><a href="${value.url}" target="_blank">${item}</a></td><td style="text-align: right">${value.date}</td></tr>`)
       }
     });
+  } else {
+    if (n == 0){
+      for (const item in table) {
+        let value = table[item];
+        cab.insertAdjacentHTML('beforebegin', 
+        `<tr><td><a href="${value.url}" target="_blank">${item}</a></td><td style="text-align: right">${value.date}</td></tr>`);
+      }
+    } else if (n == 1){
+      for (const item in table) {
+        let value = table[item];
+        if (value.archived == true) {
+          cab.insertAdjacentHTML('beforebegin', 
+          `<tr><td><a href="${value.url}" target="_blank">${item}</a></td><td style="text-align: right">${value.date}</td></tr>`);
+        }
+      }
+    } else if (n == 2){
+      for (const item in table) {
+        let value = table[item];
+        if (value.license == true) {
+          cab.insertAdjacentHTML('beforebegin', 
+          `<tr><td><a href="${value.url}" target="_blank">${item}</a></td><td style="text-align: right">${value.date}</td></tr>`);
+        }
+      }
+    } else if (n == 3){
+      for (const item in table) {
+        let value = table[item];
+        if (value.language == 'Python') {
+          cab.insertAdjacentHTML('beforebegin', 
+          `<tr><td><a href="${value.url}" target="_blank">${item}</a></td><td style="text-align: right">${value.date}</td></tr>`);
+        }
+      }
+    }
+  }
 }
 
 function search() {

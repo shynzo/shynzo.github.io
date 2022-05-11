@@ -5,22 +5,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>João Gustavo Repo</title>
-    <link rel="stylesheet" href="./src/css/index.css">
+    <title>João Gustavo Repositórios</title>
     <script src="./src/js/index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="./src/css/index.css">
+    <link rel="icon" type="image/x-icon" href="./src/img/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
 </head>
 
-<body onload="fillTable()">
+<body onload="fillAllTable(0)">
     <div class="grid-container">
         <div class="title">
-            <h1>João Gustavo</h1>
-            <h1 id="subtitle">Repo's</h1>
+            <figure>
+                <img src="./src/img/logo.png">
+            </figure>
         </div>
         <div class="filter">
-            <h2>Filtros</h2>
+            <h2 style="text-align: center">Filtros</h2>
+            <input type="radio" id="filter-all" name="filter" value="all" checked="true" onclick="fillAllTable(0)">
+            <label for="archived">Todos</label><br>
+            <input type="radio" id="filter-archived" name="filter" value="archived" onclick="fillAllTable(1)">
+            <label for="archived">Somente Arquivados</label><br>
+            <input type="radio" id="filter-licenses" name="filter" value="licenses" onclick="fillAllTable(2)">
+            <label for="archived">Somente Licenciados</label><br>
+            <input type="radio" id="filter-python" name="filter" value="python" onclick="fillAllTable(3)">
+            <label for="archived">Somente Python</label><br>
         </div>
         <div class="main">
-            <div>
+            <div id="search-box">
                 <input type="text" id="search-input" onkeyup="search()" placeholder="Pesquise por nomes...">
             </div>
             <div>
@@ -32,6 +46,16 @@
                         </tr>
                     </thead>
                 </table>
+            </div>
+        </div>
+        <div class="footer">
+            <div>
+                Aplicação desenvolvida por João Gustavo Dantas Júnior
+            </div>
+            <div style="padding-top: 5px;">
+                <a href="https://github.com/shynzo" target="_blank"><img src="./src/img/github-white-ico.png" style="width: 16px;"> <span style="left: 40px;">Github</span></a> 
+                <a href="https://www.linkedin.com/in/jo%C3%A3o-gustavo-dantas-j%C3%BAnior-464515219/" target="_blank"><span><img
+                        src="./src/img/linkedin-white-ico.png" style="width: 16px;"> LinkedIn</span></a>
             </div>
         </div>
     </div>
